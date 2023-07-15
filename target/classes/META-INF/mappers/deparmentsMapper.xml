@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring.hr.model.DepartmentsMapper">
+	<resultMap id="DepartmentsResult" type="com.spring.hr.model.Department">
+		<result property="deptId"     column="department_id"  />
+		<result property="deptName"   column="department_name"/>
+		<result property="deptMgr"    column="manager_id"     />
+		<result property="locationId" column="location_id"    />
+	</resultMap>
+	
+	
+  <!-- <select id="getDempartmentsInfo" resultType="Department"> -->
+  
+  <!-- 부서목록 조회하기  -->
+  <select id="getDepartmentsInfo" resultMap="DepartmentsResult">
+    SELECT /*+   getDepartmentsInfo  */
+           department_id         as department_id
+         , '$'||department_name  as department_name
+         , manager_id||'*'       as manager_id
+         , location_id           as location_id
+      FROM departments 
+     ORDER BY department_id
+  </select>
+  
+
+</mapper>
